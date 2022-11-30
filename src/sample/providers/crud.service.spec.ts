@@ -12,10 +12,7 @@ let idx: number;
 
 beforeAll(async () => {
   moduleRef = await Test.createTestingModule({
-    imports: [
-      TypeOrmModule.forRoot({ ...(<DataSourceOptions>(await configuration()).db) }),
-      TypeOrmModule.forFeature([Sampletable1]),
-    ],
+    imports: [TypeOrmModule.forRoot({ ...(<DataSourceOptions>(await configuration()).db) }), TypeOrmModule.forFeature([Sampletable1])],
     providers: [CrudService],
   }).compile();
 

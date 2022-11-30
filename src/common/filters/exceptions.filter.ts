@@ -10,7 +10,11 @@ export class ExceptionsFilter extends BaseExceptionFilter implements GqlExceptio
     let args: unknown;
     if (host.getType<GqlContextType>() === 'graphql') {
       const gqlHost = GqlArgumentsHost.create(host);
-      const { req: { body: { operationName, variables } } } = gqlHost.getContext();
+      const {
+        req: {
+          body: { operationName, variables },
+        },
+      } = gqlHost.getContext();
       args = `${operationName} ${JSON.stringify(variables)}`;
     } else {
       super.catch(exception, host);
@@ -31,8 +35,6 @@ export class ExceptionsFilter extends BaseExceptionFilter implements GqlExceptio
   }
 
   private getHttpStatus(exception: unknown): number {
-    return exception instanceof HttpException
-      ? exception.getStatus()
-      : HttpStatus.INTERNAL_SERVER_ERROR;
+    return exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
   }
 }

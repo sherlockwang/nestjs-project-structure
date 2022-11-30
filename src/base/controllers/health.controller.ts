@@ -1,21 +1,21 @@
 import { Controller, Get } from '@nestjs/common';
-import { HealthCheck, HealthCheckResult, HealthCheckService,
-  HealthIndicatorResult, HttpHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import {
+  HealthCheck,
+  HealthCheckResult,
+  HealthCheckService,
+  HealthIndicatorResult,
+  HttpHealthIndicator,
+  TypeOrmHealthIndicator,
+} from '@nestjs/terminus';
 
-import { Public } from '../../common';
 
 /**
  * https://docs.nestjs.com/recipes/terminus
  */
 @Controller()
 export class HealthController {
-  constructor(
-    private health: HealthCheckService,
-    private http: HttpHealthIndicator,
-    private db: TypeOrmHealthIndicator,
-  ) {}
+  constructor(private health: HealthCheckService, private http: HttpHealthIndicator, private db: TypeOrmHealthIndicator) {}
 
-  @Public()
   @Get('health')
   @HealthCheck()
   public async check(): Promise<HealthCheckResult> {

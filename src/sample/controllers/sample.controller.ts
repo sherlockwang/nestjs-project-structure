@@ -1,9 +1,9 @@
-import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, Query, Req, Res } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 
 import type { Sampletable1 } from '#entity/sampledb1';
-import { Roles, RolesGuard, ConfigService } from '../../common';
+import { ConfigService } from '../../common';
 import { FoobarService } from '../../shared/foobar';
 import { SampleDto } from '../dto';
 import { DatabaseService } from '../providers';
@@ -11,7 +11,6 @@ import { DatabaseService } from '../providers';
 /**
  * route /test/sample/*
  */
-@UseGuards(RolesGuard)
 @Controller('sample')
 export class SampleController {
   constructor(
@@ -72,11 +71,5 @@ export class SampleController {
   @Get('foobars')
   public async foobars(): Promise<Sampletable1[]> {
     return this.foobarService.getFoobars();
-  }
-
-  @Roles('admin')
-  @Get('admin') // http://localhost:3000/test/sample/admin
-  public admin(): string {
-    return 'Need admin role';
   }
 }
