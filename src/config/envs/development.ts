@@ -1,5 +1,13 @@
 export const config = {
   db: {
+    // type: 'postgres',
+    // synchronize: false,
+    // logging: true,
+    // host: '172.17.0.2',
+    // port: 5432,
+    // username: 'postgres',
+    // password: 'postgrespw',
+    // database: 'postgres',
     type: process.env.DB_TYPE || 'mysql',
     synchronize: false,
     logging: true,
