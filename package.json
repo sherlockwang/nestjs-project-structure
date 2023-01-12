@@ -1,6 +1,6 @@
 {
   "name": "nestjs-project-structure",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Node.js framework NestJS project structure",
   "main": "dist/app",
   "scripts": {
@@ -80,16 +80,11 @@
     "typeorm-model-generator": "^0.4.6-no-engines",
     "typescript": "^4.8.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/CatsMiaow/nestjs-project-structure.git"
-  },
   "keywords": [
     "Node.js",
     "NestJS",
     "TypeScript"
   ],
-  "homepage": "https://github.com/CatsMiaow/nestjs-project-structure#readme",
-  "author": "CatsMiaow",
+  "author": "Wang Jinghan, Hefeng Xu",
   "license": "MIT"
 }

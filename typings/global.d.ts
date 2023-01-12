@@ -7,6 +7,7 @@ export declare global {
     interface ProcessEnv {
       NODE_ENV: string;
       PORT: string;
+      BASE_PATH: string;
 
       DB_TYPE: string;
       DB_HOST: string;

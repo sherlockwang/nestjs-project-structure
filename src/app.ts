@@ -2,6 +2,7 @@ import { Logger as NestLogger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { middleware } from './app.middleware';
 import { AppModule } from './app.module';
@@ -17,12 +18,25 @@ async function bootstrap(): Promise<string> {
     bufferLogs: true,
   });
 
+  if (process.env.BASE_PATH) {
+    app.setGlobalPrefix(process.env.BASE_PATH);
+  }
+
   app.useLogger(app.get(Logger));
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
   if (isProduction) {
     app.enable('trust proxy');
   }
+
+  const options = new DocumentBuilder()
+    .setTitle('OpenAPI Documentation')
+    .setDescription('The sample API description')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup(process.env.BASE_PATH + '/' + 'api', app, document);
 
   // Express Middleware
   middleware(app);

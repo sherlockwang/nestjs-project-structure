@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodestack
+  labels:
+    app: nodestack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodestack
+  template:
+    metadata:
+      labels:
+        app: nodestack
+    spec:
+#       serviceAccountName: aws-sa
+      containers:
+        - name: nodestack
+          image: 877021826353.dkr.ecr.cn-northwest-1.amazonaws.com.cn/node-microservice-template:latest
+          resources:
+            limits:
+              cpu: '1'
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
+          imagePullPolicy: Always
+      restartPolicy: Always
+
